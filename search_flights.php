@@ -8,10 +8,11 @@
       <table id="UserFillTable">
         <tr>
           <td><label for="field_one">Name</label></td>
-          <td><input id="field_one" name="field_one" type="text" value=''> </td>
+          <td><input id="field_one" name="field_one" type="text"> </td>
         </tr>
         <tr>
           <td> <input type='submit' name='submit' value="Search"/>
+            <!-- not doing what I want it to -->
           <input type='hidden' value=null/> </td>
         </tr>
       </table>
@@ -81,20 +82,6 @@
     }
   }
 
-  /*if ($searched_name == '') {
-    echo "searched nothing";
-  }
-  else {
-    echo "searched something";
-  }
-  $sql2 = 'SELECT airline_name from Flight';
-  $res2 = $pdo->query($sql);
-  foreach ($res as $row) {
-    echo "<tr><td>", $row['airline_name'], "</td>",
-         "<td>", $row['flight_number'], "</td>",
-         "<td>", $row['capacity'], "</td>",
-         "<td>", $row['passenger_count'], "</td></tr>\n";
-  }*/
   ?>
   </table>
 
