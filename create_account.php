@@ -73,6 +73,7 @@
     // if there is an empty field, display the error message
     if(! empty($error_message)) {
       echo $error_message;
+      exit();
     }
     /* else there is no empty field, and so check if credit card number is
         already in use, there can be more than 1 person with the same name
@@ -96,24 +97,41 @@
       }
       // else no match was found and so add into the database
       else {
-        $username .= $inputFieldsArgs['field_one'];
+        // assigns variables to the inputs
+        $username = $inputFieldsArgs['field_one'];
         $username .= ' ';
         $username .= $inputFieldsArgs['field_two'];
-        $tempNum = '1211';
-        $sql_insert = 'INSERT INTO Passenger (account_num, name, credit_card_num) VALUES (:tempNum, :username, :credit_card_num)';
+        $found = 0;
+        $credit_card_num = $inputFieldsArgs['field_three'];
+
+        // generates a random, unique account number between 1000 and 9999
+        while ($found == 0) {
+          $tempNum = (rand(1000, 9999));
+          try {
+            // checks if the random account number is in the database
+            $sql_uniqueCard = "SELECT COUNT(*) FROM Passenger WHERE account_num=$tempNum";
+            $res = $pdo->query($sql_uniqueCard);
+            // if the account number is not in the db, it is unique
+            if (! $res->fetchColumn() > 0) {
+              $found = 1;
+            }
+          } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+          }
+        }
+        // adds the account to the database
         try {
-          $stmt2 = $pdo->prepare($sql_insert);
-          $stmt2->execute($inputFieldsArgs);
+          $sql_insert = "INSERT INTO Passenger (account_num, name, credit_card_num) VALUES (?, ?, ?)";
+          $pdo->prepare($sql_insert)->execute([$tempNum, $username, $credit_card_num]);
         } catch (PDOException $e) {
           $error_message = $e->getMessage();
         }
-
+        // displays the error message if any
         if (! empty($error_message)) {
           echo $error_message;
         }
         else {
           echo "user added";
-
         }
       }
     }
@@ -124,5 +142,4 @@
   ?>
 
 </body>
-
 </html>
