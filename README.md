@@ -30,10 +30,12 @@ http://web.engr.oregonstate.edu/~guptaso/cs340_finalproject/
 
 ~~14. While obfuscation of front-end code is sometimes used in the real world, source code that you turn in for this project should not be obfuscated; readability is essential in the evaluation process.~~
 
-15. Your web application should render in a "stock" version of Chrome and Firefox. Use of Adobe Flash, Java applet, JNLP, or any in-browser runtime framework that would require installation of a non-standard browser plugin/extension is not allowed.
+~~15. Your web application should render in a "stock" version of Chrome and Firefox. Use of Adobe Flash, Java applet, JNLP, or any in-browser runtime framework that would require installation of a non-standard browser plugin/extension is not allowed.~~
 
 16. Your application should make some effort to defend against a SQL injection attack, as described in the SQL injection section of the PHP manual (Links to an external site.)Links to an external site.. Acceptable countermeasures would be either to manually (or using a library function) check input data for invalid characters or to use prepared statements and parameterized queries such as through the PHP Data Objects (PDO) class (Links to an external site.)Links to an external site..
 
 17. Your application source code (the application logic code, not the DDL SQL code) should be commented; see Code commenting guidelines.
 
 18. The data that you have pre-populated in your database tables should be visible in the UI of your web application; in other words, the application should not be "empty" when the instructor or TA first uses it.
+
+mysql dump file!
