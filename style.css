@@ -1,99 +1,63 @@
-.main-wrapper { 
-	margin: 0 auto;
-	width: 1000px;
+//Style the header
+.header{ 
+	overflow: hidden;
+	background-color:#f1f1f1;
+	padding: 20px 10px;
 }
 
-a{ 
+.header a { 
+	float: left;
+	color: black;
+	text-align: center;
+	padding: 12px;
 	text-decoration:none;
+	font-size:18px;
+	line-height:25px;
+	border-radius:4px;
+}
+
+.header a.logo{ 
+	font-size:25px;
+	font-weight:bold;
+}
+
+//Style the navigation bar
+.nav-acc { 
+	overflow:hidden;
+	//background-color:#333333;
+}
+
+.nav-acc a{ 
+	float:left;
+	display:block;
+	color:#333333;
+	text-align:center;
+	padding:14px 16px;
+	text-decoration:none;
+	//background-color:#3399FF;
+}
+
+.content { 
+	background-color: #FFFFFF;
+	padding: 10px;
+	//height: 200px;
 }
 
 body{ 
-	background-color: #33CCFF;
+   	margin:0;
+	font-family:Arial;
 }
 
-//Navigation bar
-header nav{ 
-	width: 100%;
-	height: 60px;
-	background-color: #fff;
-}
-
-header nav ul { 
-	float: left;
-}
-
-header nav ul li{ 
-	float:left;
-	list-style:none;
-}
-
-//nav text
-header nav ul li a{ 
-   	font-family: arial;
-	font-size: 16px;
-	color: #3399FF;
-	line-height: 63px;
-}
-
-.main-container { 
-	padding-top: 40px;
-}
-
-.main-container h2{ 
-	font-family: arial;
-	font-size: 40px;
-	color:#3399FF;
-	line-height: 50px;
-	text-align: center;
-}
-
-//Style login.php
-.login-form { 
-	width: 400px;
-	margin: 0 auto;
-	padding-top: 30px;
-}
-
-.login-form input { 
-	font-family: arial;
-	background-color: #fff;
-	width: 90%;
-	height:40px;
-	padding: 0px 5%;
-	margin-bottom: 4px;
-	border: none;
-	font-size: 16px;
-	color: #3399FF;
-	line-height: 40px;
-}
-
-.login-form button { 
-	display: block;
-	width: 30%;
-	height: 40px;
-	border: none;
-	font-family: arial;
-	background-color:#3366FF;
-	font-size: 16px;
-	color: #111;//white
-	cursor: pointer;
-}
-
-.login-form button { 
-	background-color: #3399FF;
-}
-
-//Style signup.php
-.signup-form { 
+//Style myacc.php
+.account-form { 
 	width: 400px;
 	margin: 0 auto;
 	padding-top: 30px;
 }
 
 //corresponds w/ signup.php class containing inputs
-.signup-form input { 
+.account-form input { 
 	font-family: arial;
-	background-color: #fff;
 	width: 90%;
 	height:40px;
 	padding: 0px 5%;
@@ -101,21 +65,7 @@ header nav ul li a{
 	border: none;
 	font-size: 16px;
 	color: #3399FF;
+	//color:#111;
 	line-height: 40px;
 }
 
-.signup-form button { 
-	display: block;
-	width: 30%;
-	height: 40px;
-	border: none;
-	font-family: arial;
-	background-color:#3366FF;
-	font-size: 16px;
-	color: #111;//white
-	cursor: pointer;
-}
-
-.signup-form button { 
-	background-color: #3399FF;
-}
