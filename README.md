@@ -26,7 +26,7 @@ http://web.engr.oregonstate.edu/~guptaso/cs340_finalproject/
 
 ~~12. Internationalization and Unicode support are extremely important in the real-world, but your web application should use U.S. English and it is not a requirement to support Unicode input. We cannot grade a web application if the content is in a language (or even character set) that we cannot read or do not understand.~~
 
-~~13. Strict W3C standards compliance, while laudable, is not a requirement for this project; but see requirement (6) above. ~~
+~~13. Strict W3C standards compliance, while laudable, is not a requirement for this project; but see requirement (6) above.~~
 
 ~~14. While obfuscation of front-end code is sometimes used in the real world, source code that you turn in for this project should not be obfuscated; readability is essential in the evaluation process.~~
 
