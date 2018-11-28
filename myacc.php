@@ -27,7 +27,7 @@
   }
 </style>
 </head>
-<body style="background-image:url("http://web.engr.oregonstate.edu/~sunamotl/braden-jarvis-383867-unsplash.jpg")">
+<body style="background-image:url(http://web.engr.oregonstate.edu/~sunamotl/braden-jarvis-383867-unsplash.jpg)">
   <section class="main-container">
     <div class="main-wrapper">
       <h2>My Account</h2>
