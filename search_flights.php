@@ -1,7 +1,7 @@
-<!--</*?php
+<?php
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
-?*/>-->
+?>
 
 <style>
 table,tr,td{
@@ -47,7 +47,7 @@ table,tr,td{
     </form>
   </div>
 
-  <script type="text/text/javascript">
+  <script type="text/javascript">
   function EraseTable() {
     var table = document.getElementById("displayResultsTable");
     for (var i = 1, row; row=table.rows[i]; i++) {
