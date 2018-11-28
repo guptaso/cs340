@@ -5,7 +5,7 @@
 
 <body>
   <h2> Enter Your Information </h2>
-  <form method = "post" action="create_account.php">
+  <form method = "post" action="">
     <table id="CreateAccountTable">
       <tr>
         <td><label for="field_one">First Name</label></td>
@@ -50,7 +50,8 @@
   $error_message="";
   // when the user hits the submit button
   $submit = $inputFieldsArgs['submit'];
-  if (! empty($submit)) {
+  //if (! empty($submit)) {
+  if (isset($_POST['submit'])) {
     // check that all the fields are filled
     // checks that the first name is entered
     if (empty($inputFieldsArgs['field_one'])) {
@@ -73,7 +74,6 @@
     // if there is an empty field, display the error message
     if(! empty($error_message)) {
       echo $error_message;
-      exit();
     }
     /* else there is no empty field, and so check if credit card number is
         already in use, there can be more than 1 person with the same name
@@ -93,7 +93,7 @@
     if (empty($error_message)) {
       // if there was a match found in the database
       if ($previous_match > 0) {
-        $error_message = "credit card " . $credit_card_num . "is already taken";
+        $error_message .= "credit card " . $credit_card_num . "is already taken";
       }
       // else no match was found and so add into the database
       else {
@@ -135,9 +135,8 @@
         }
       }
     }
-    else {
-      echo $error_message;
-    }
+    echo $error_message;
+    //echo "<meta http-equiv='refresh' content='0'>";
   }
   ?>
 
