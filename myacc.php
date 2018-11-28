@@ -1,18 +1,19 @@
 <style>
 #updateButton {
   position: relative;
-  bottom: -500px;
+  bottom: -520px;
 }
 #updateInfoForm {
   position: relative;
+
+}
+#NewName{
+  position: relative;
+  bottom: -470px;
 }
 </style>
 
-<script type="text/javascript">
-  function updateInfo() {
 
-  }
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -33,17 +34,20 @@
       <h2>My Account</h2>
       <form class="account_form" action="myacc.php" method="post">
         <input type="number" name="user" placeholder="Account Number"><br>
-        <button type="submit" name="submit">Submit</button><br>
+        <button type="submit" name="submit" >Submit</button><br>
       </form>
     </div>
   </section>
   <table id=updateInfoTable>
-    <form method="post" action="myacc.php" id="updateInfoForm">
-      <input type="text" name="firstNewName" placeholder="First Name">
-      <input type="text" name="lastNewName" placeholder="Last Name">
+    <form method="post" action="myacc.php" >
+      <input type="text" id="NewName" id="firstNewName" name="firstNewName" placeholder="First Name">
+      <input type="text" id="NewName" id="lastNewName" name="lastNewName" placeholder="Last Name">
+      <input type="text" id="NewName" id="verifyAcctNum" name="verifyAcctNum" placeholder="Verify Acct. Number">
+      <button id="updateButton" name="updateButton" type="updateButton" >Update Information</button>
+
     </form>
   </table>
-  <button id="updateButton" type="button" onclick="updateInfo()">Update Information</button>
+
 
   <?php
   $host = 'classmysql.engr.oregonstate.edu';
@@ -64,7 +68,7 @@
 	  $submit = $_POST['submit'];
 
 	  //check if the submit button was clicked
-	  if(isset($submit)){
+	  if(isset($_POST['submit'])){
       $pdo = new PDO($dsn, $user, $pass, $opt);
       //Authenticate user's provide account number
 	    $sql = $pdo->query("SELECT * FROM Passenger WHERE account_num='$userN'");
@@ -98,6 +102,50 @@
       echo "</table>";
   		exit();
   		//$sql2 = null;
+    }
+    if(isset($_POST['updateButton'])) {
+      if (($_POST['firstNewName']) || ($_POST['lastNewName'])) {
+        if (! ($_POST['verifyAcctNum'])) {
+          echo "Please verify your account number";
+        }
+        $pdo = new PDO($dsn, $user, $pass, $opt);
+        $num = ($_POST['verifyAcctNum']);
+
+        $sql = $pdo->query("SELECT name, account_num FROM Passenger WHERE account_num='$num'");
+        if($sql->rowCount() == 0) {
+          echo "ERROR: couldn't locate account number";
+        }
+        else {
+          foreach ($sql as $row) {
+            $array = $row['name'];
+            $arr = explode(' ',trim($array));
+            if (($_POST['firstNewName'])) {
+              $first = ($_POST['firstNewName']);
+            } else {
+              $first = $arr[0];
+            }
+            if (($_POST['lastNewName'])) {
+              $last = ($_POST['lastNewName']);
+            } else {
+              $last = $arr[1];
+            }
+            $newName= $first;
+            $newName.=' ';
+            $newName.=$last;
+            $sql2 = $pdo->query("UPDATE `Passenger` SET `name` = '$newName' WHERE `Passenger`.`account_num` = '$num'");
+            echo "Account name updated successfully";
+          }
+
+
+            //
+
+         }
+
+        $last = ($_POST['lastNewName']);
+
+
+      }
+
     }
   } catch (\PDOException $e){
     $error_message = $e->getMessage();
