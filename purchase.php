@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <body>
+<body style="background-image:url(http://web.engr.oregonstate.edu/~sunamotl/braden-jarvis-383867-unsplash.jpg)">
 	<h2>Purchase Ticket</h2>
 	<form action="purchase.php" method="post">
-	    Schedule Number: <input type="number" name="num"><br>
+	    Flight Number: <input type="number" name="num"><br>
 	    Price(Economy:$200 Business:$300 First-Class:$500): <input type="number" name="price"><br>
 	    Account Number: <input type="number" name="an"><br>	    
 	    Credit Card Number: <input type="number" name="ccn"><br>	    
@@ -37,7 +37,7 @@
 				exit();
 			}else{ 
 			   	//Check that the flight associated w/ the supplied sched./flight # exists
-			   	$sql = "SELECT * FROM Flight WHERE flight_number='$num'";
+			   	$sql = "SELECT * FROM Flight_Schedule WHERE schedule_num='$num'";
 				$res = $pdo->prepare($sql);
 				$res->execute();
 				if($res->rowCount()<0){ 
@@ -57,34 +57,78 @@
 					   //verify credit card number
 					   foreach($res as $row){ 
 					      $credit_num=$row['credit_card_num'];
-					      //echo "$credit_num";
 					      if($credit_num == $ccn){ 
-					      	echo 'ccn verified';
+					      	//verify purchase price option
+						 if($price == 200){ 
+					   		echo "<h3>"."Thank you! Economy ticket for flight $num successfully purchased."."</h3>";
+					   		echo "<br>";
+						 }else if($price == 300){ 
+					   		echo "<h3>"."Thank you! Business ticket for flight $num successfully purchased."."</h3>";
+					   		echo "<br>";
+						 }else if($price == 500){ 
+					   		echo "<h3>"."Thank you! First-Class ticket for flight $num successfully purchased."."</h3>";
+					   		echo "<br>";
+						 }else{ 
+						 	echo "invalid price entered";
+							exit();
+						 }
 					      }else{ 
-					      	echo 'invalid ccn';
+					      	echo 'invalid credit card number';
 						exit();
 					      }
 					   }
-					   echo "Ticket for flight $num successfully purchased";
-					   echo "<br>";
 					   //provide link back to home page
-					   //$link_address1 = 'home.html';
-					   //echo "<a href='$link_address1'>List users</a>";
+					   $link_address1 = 'home.php';
+					   echo "<a href='$link_address1'>Return to Home</a>";
 					}
 				}
-			//	$sql = null;
-			//	$res = null;
 
 			}
-			/*
 			//no errors present
-			//insert the provided information
-			$sql = "INSERT INTO Ticket (schedule_num,Price,account_num,Gate_Number) VALUES ('$num','$price','$an','$ccn')";
+			//get gate number: schedule/flight #555:B6 and #999:#G22
+			if($num == 555){ 
+			   	$gate = B6;
+			}else{ 
+				$gate = G22;
+			}
+			//insert the provided information, ticket_ID is auto. incremented
+			$sql = "INSERT INTO Ticket (schedule_num,Price,account_num,Gate_Number) VALUES ('$num','$price','$an','$gate')";
 		        $res = $pdo->prepare($sql);
 		        $res->execute();	       
 			$sql = null;
 			$res = null;
-			*/
+			
+			//update Flight table by incrementing passenger_count column
+			//for specific flight purchased which is $num
+			//get flight number using schedule number
+			$sql = "SELECT * FROM Flight_Schedule WHERE schedule_num = '$num'"; 
+		        $res = $pdo->prepare($sql);
+		        $res->execute();	       
+			foreach($res as $row){ 		
+			   	$flight = $row["flight_number"];     
+				//get number of passengers from Flight table
+				$sql2 = "SELECT * FROM Flight WHERE flight_number='$flight'";
+			        $res2 = $pdo->prepare($sql2);
+				$res2->execute();
+		      		foreach($res2 as $row2){ 		
+				   $passengers=$row2["passenger_count"];
+				   $passengers = $passengers + 1;
+				   $sql3 = "UPDATE Flight SET passenger_count = '$passengers' WHERE flight_number = '$flight'";
+			           $res3 = $pdo->prepare($sql3);
+				   $res3->execute();
+				}
+			}
+
+			//NULLify all queries
+			$sql = null;
+			$res = null;
+			$row = null;
+			$sql2 = null;
+			$res2 = null;	
+			$row2 = null;
+			$sql3 = null;
+			$res3 = null;
+			
 			exit();
 	        }
 	    } catch (\PDOException $e){ 
