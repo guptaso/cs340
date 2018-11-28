@@ -13,7 +13,7 @@ table,tr,td{
 }
 </style>
 <html>
-<body>
+<body style="background-image:url(http://web.engr.oregonstate.edu/~sunamotl/braden-jarvis-383867-unsplash.jpg)">
   <h1> Seach Flights </h1>
   <div id="searchBar" class="searchBar">
     <h2 id="searchBarHead"> Enter Search Criteria </h2>
