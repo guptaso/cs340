@@ -13,7 +13,7 @@
 	</div>
 	</div>
 	<div class="center">
-		<h1>Search and book flights with Flight Scheduler. We're here to get you there.</p>
+		<h1>Search and book flights with Flight Scheduler. We're here to get you there.</h1>
 	</div>
 
 </body>
