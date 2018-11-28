@@ -62,10 +62,6 @@ table,th,td{
 		   
 		   //foreach($sql2 as $row2){ 
 		  while($row2 = $sql2->fetch(PDO::FETCH_ASSOC)){ 
-		   //echo 'in for loop';
-		      /*
-		      echo "<tr><td>".$row2["schedule_num"]."</td><td>"."$".$row2["Price"]."</td><td>".$row2["Ticket_ID"]."</td><td>".$row2["account_num"]."</td><td>".$row2["Gate_Number"]."</td></tr>"
-		       */
 		      	echo "<tr>";
 			echo "<td>".$row2["schedule_num"]."</td>";
 			echo "<td>"."$".$row2["Price"]."</td>";
@@ -76,8 +72,8 @@ table,th,td{
 		   }
 		    
 		   echo "</table>";
+		   $sql2 = null;
 		   exit();		   
-		   //$sql2 = null;
 	        }
 	    } catch (\PDOException $e){ 
 	    	$error_message = $e->getMessage();

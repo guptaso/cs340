@@ -1,7 +1,6 @@
 //Style the header
 .header{ 
 	overflow: hidden;
-	background-color:#f1f1f1;
 	padding: 20px 10px;
 }
 
@@ -10,7 +9,7 @@
 	color: black;
 	text-align: center;
 	padding: 12px;
-	text-decoration:none;
+	text-decoration:none;//remove underlines
 	font-size:18px;
 	line-height:25px;
 	border-radius:4px;
@@ -24,7 +23,7 @@
 //Style the navigation bar
 .nav-acc { 
 	overflow:hidden;
-	//background-color:#333333;
+	background-color:#3399FF;
 }
 
 .nav-acc a{ 
@@ -36,16 +35,22 @@
 	text-decoration:none;
 	//background-color:#3399FF;
 }
-
-.content { 
-	background-color: #FFFFFF;
-	padding: 10px;
-	//height: 200px;
+//Styling Home page
+body,html{ 
+   	margin:0;
+	font-family:sans-serif;
+	height:100%;
 }
 
-body{ 
-   	margin:0;
-	font-family:Arial;
+//center the home page text
+h1 { 
+	left:0;
+	line-height:200px;
+	margin:auto;
+	margin-top:-100px;
+	position:absolute;
+	top:50%;
+	width:100%;
 }
 
 //Style myacc.php
@@ -53,6 +58,7 @@ body{
 	width: 400px;
 	margin: 0 auto;
 	padding-top: 30px;
+	background-color: #3399FF;
 }
 
 //corresponds w/ signup.php class containing inputs
@@ -68,4 +74,3 @@ body{
 	//color:#111;
 	line-height: 40px;
 }
-
