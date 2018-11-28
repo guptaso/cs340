@@ -32,11 +32,11 @@ table,tr,td{
           <td><label for="field_one">Airline Name</label></td>
           <td><input id="field_one" name="field_one" type="text"> </td>
         </tr>
-        <!--<tr>
+        <tr>
           <td><label for="field_two">Departure Location</label></td>
           <td><input id="field_two" name="field_two" type="text"> </td>
         </tr>
-        <tr>
+        <!--<tr>
           <td><label for="field_three">Arrival Location</label></td>
           <td><input id="field_three" name="field_three" type="text"></td>
         </tr> -->
@@ -66,7 +66,7 @@ table,tr,td{
       <td><b>Seats Available</b></td>
       <td><b>Departure Location</b></td>
       <td><b>Arrival Location</b></td>
-      <td><b>Purchase</b></td>
+      <!--<td><b>Purchase</b></td>-->
     </tr>
 
   <?php
@@ -102,7 +102,7 @@ table,tr,td{
 
 */
   // gets the name argument from the form
-  if( isset($_POST["submit"])){
+  /*if( isset($_POST["submit"])){
     if($_POST['field_one']) {
       $searched_name = $_POST['field_one'];
       $sql2 = "SELECT airline_name, flight_number, capacity, passenger_count FROM Flight WHERE airline_name='{$_POST['field_one']}'";
@@ -126,6 +126,34 @@ table,tr,td{
         }
       }
     }
+  }*/
+  if (isset($_POST['submit'])){
+    $searched_name = $_POST['field_one'];
+    $departure_loc = $_POST['field_two'];
+    if(($_POST['field_one']) && ($_POST['field_two'])) {
+      $sql2 = "SELECT * FROM Flight INNER JOIN Flight_Schedule ON `Flight`.`flight_number`=`Flight_Schedule`.`flight_number` WHERE `Flight`.`airline_name`='$searched_name' AND `Flight_Schedule`.`Departure_Location`='$departure_loc'";
+    }
+    elseif (($_POST['field_one']) && (!($_POST['field_two']))) {
+      $sql2 = "SELECT * FROM Flight INNER JOIN Flight_Schedule ON `Flight`.`flight_number`=`Flight_Schedule`.`flight_number` WHERE `Flight`.`airline_name`='{$_POST['field_one']}'";
+    }
+    elseif ((!($_POST['field_one'])) && ($_POST['field_two'])) {
+      //$sql2 = "SELECT * FROM Flight_Schedule INNER JOIN Flight ON `Flight_Schedule`.`flight_number`=`Flight`.`flight_number` WHERE `Flight_Schedule`.`Departure_Location`=`{$_POST['field_two']}`";
+      $sql2 = "SELECT * FROM Flight INNER JOIN Flight_Schedule ON `Flight`.`flight_number`=`Flight_Schedule`.`flight_number` WHERE `Flight_Schedule`.`Departure_Location`='{$_POST['field_two']}'";
+
+    }
+    $res2 = $pdo->query($sql2);
+    foreach ($res2 as $row) {
+      $passengers2 = $row['passenger_count'];
+      $cap2 = $row['capacity'];
+      $available2 = $cap2 - $passengers2;
+      echo "<tr><td>", $row['airline_name'], "</td>",
+             "<td>", $row['flight_number'], "</td>",
+             "<td>", $row['capacity'], "</td>",
+             "<td>", $available2, "</td>",
+             "<td>", $row['Departure_Location'], "</td>",
+             "<td>", $row['Arrival_Location'], "</td></tr>\n";
+
+    }
   }
 
   ?>
@@ -140,7 +168,7 @@ table,tr,td{
       <td><b>Seats Available</b></td>
       <td><b>Departure Location</b></td>
       <td><b>Arrival Location</b></td>
-      <td><b>Purchase</b></td>
+      <!--<td><b>Purchase</b></td>-->
     </tr>
     <?php
     $pass = '9839';
